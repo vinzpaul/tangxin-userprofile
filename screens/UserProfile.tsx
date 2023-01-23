@@ -162,8 +162,16 @@ const UserProfile = () => {
           </View>
 
           <View style={{ marginVertical: gap / 1 }}>
-            <View style={{ backgroundColor: "brown" }}>
-              <Text>Second Container</Text>
+            <View
+              style={{
+                backgroundColor: "#FDE5C3",
+                borderRadius: 10,
+                height: 50,
+              }}
+            >
+              <Text style={{ color: "#996B3C", fontWeight: "600" }}>
+                Second Container
+              </Text>
             </View>
           </View>
 
