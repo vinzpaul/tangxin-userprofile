@@ -12,7 +12,14 @@ import {
   FlatList,
 } from "react-native";
 
-import { EvilIcons, FontAwesome5 } from "@expo/vector-icons";
+import {
+  EvilIcons,
+  FontAwesome5,
+  Ionicons,
+  Feather,
+  Foundation,
+  Entypo,
+} from "@expo/vector-icons";
 import { transform } from "typescript";
 
 const UserProfile = () => {
@@ -26,10 +33,13 @@ const UserProfile = () => {
           maxHeight: Dimensions.get("window").height,
           marginHorizontal: 15,
           marginVertical: 20,
-          // backgroundColor: "#FFFFFF",
         }}
       >
-        <ScrollView style={{ flex: 1, paddingVertical: gap / -2 }}>
+        <ScrollView
+          style={{ flex: 1, paddingVertical: gap / -2 }}
+          showsVerticalScrollIndicator={false}
+        >
+          {/* First Container */}
           <View style={{ marginVertical: gap / 1 }}>
             <View
               style={{
@@ -44,7 +54,7 @@ const UserProfile = () => {
             <View
               style={{
                 backgroundColor: "#262632",
-                borderRadius: 10,
+                borderRadius: 5,
                 height: 100,
                 flex: 1,
               }}
@@ -161,35 +171,411 @@ const UserProfile = () => {
             </View>
           </View>
 
+          {/* Second Container */}
           <View style={{ marginVertical: gap / 1 }}>
             <View
               style={{
                 backgroundColor: "#FDE5C3",
                 borderRadius: 10,
                 height: 50,
+                padding: 5,
               }}
             >
-              <Text style={{ color: "#996B3C", fontWeight: "600" }}>
-                Second Container
-              </Text>
+              <View
+                style={{
+                  flexDirection: "row",
+                  alignItems: "center",
+                  marginHorizontal: 10,
+                }}
+              >
+                <FontAwesome5 name="medal" size={28} color="#996B3C" />
+                <View style={{ marginLeft: 5 }}>
+                  <Text style={{ color: "#996B3C", fontWeight: "600" }}>
+                    开通会员
+                  </Text>
+                  <View
+                    style={{
+                      borderWidth: 1,
+                      borderRadius: 5,
+                      borderColor: "#996B3C",
+                    }}
+                  >
+                    <Text
+                      style={{
+                        color: "#996B3C",
+                        marginHorizontal: 10,
+                      }}
+                    >
+                      享无限观看，购片折扣等权益
+                    </Text>
+                  </View>
+                </View>
+                <View style={{ position: "absolute", right: 5 }}>
+                  <FontAwesome5 name="angle-right" size={25} color="#996B3C" />
+                </View>
+              </View>
             </View>
           </View>
 
+          {/* Third Container */}
           <View style={{ marginVertical: gap / 1 }}>
-            <View style={{ backgroundColor: "brown" }}>
-              <Text>Third Container</Text>
+            <View
+              style={{
+                backgroundColor: "#262632",
+                height: 80,
+                borderRadius: 5,
+              }}
+            >
+              <View
+                style={{
+                  flex: 1,
+                  flexDirection: "row",
+                  justifyContent: "space-evenly",
+                  marginHorizontal: -15,
+                }}
+              >
+                <View
+                  style={{
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  <Ionicons name="ribbon-sharp" size={25} color="white" />
+                  <Text
+                    style={{
+                      color: "white",
+                      textAlign: "center",
+                      fontSize: 12,
+                      marginTop: 5,
+                    }}
+                  >
+                    升级会员
+                  </Text>
+                </View>
+
+                <View
+                  style={{ justifyContent: "center", alignItems: "center" }}
+                >
+                  <Ionicons name="md-wallet-outline" size={25} color="white" />
+                  <Text
+                    style={{
+                      color: "white",
+                      textAlign: "center",
+                      fontSize: 12,
+                      marginTop: 5,
+                    }}
+                  >
+                    我的卡包
+                  </Text>
+                </View>
+
+                <View
+                  style={{ justifyContent: "center", alignItems: "center" }}
+                >
+                  <FontAwesome5
+                    name="envelope-open-text"
+                    size={25}
+                    color="white"
+                  />
+                  <Text
+                    style={{
+                      color: "white",
+                      textAlign: "center",
+                      fontSize: 12,
+                      marginTop: 5,
+                    }}
+                  >
+                    我的收藏
+                  </Text>
+                </View>
+
+                <View
+                  style={{ justifyContent: "center", alignItems: "center" }}
+                >
+                  <Feather name="shopping-cart" size={25} color="white" />
+                  <Text
+                    style={{
+                      color: "white",
+                      textAlign: "center",
+                      fontSize: 12,
+                      marginTop: 5,
+                    }}
+                  >
+                    我的购买
+                  </Text>
+                </View>
+              </View>
             </View>
           </View>
 
+          {/* Fourth Container */}
           <View style={{ marginVertical: gap / 1 }}>
-            <View style={{ backgroundColor: "brown" }}>
-              <Text>Fourth Container</Text>
+            <View
+              style={{
+                backgroundColor: "#262632",
+                height: 50,
+                borderRadius: 5,
+                justifyContent: "center",
+              }}
+            >
+              <View
+                style={{
+                  flexDirection: "row",
+                  justifyContent: "space-evenly",
+                  marginHorizontal: -15,
+                }}
+              >
+                <View
+                  style={{
+                    flexDirection: "row",
+                    alignItems: "center",
+                  }}
+                >
+                  <Foundation name="clipboard-pencil" size={25} color="white" />
+                  <Text style={{ color: "white", fontSize: 12, marginLeft: 5 }}>
+                    发布动态
+                  </Text>
+                </View>
+
+                <View style={{ flexDirection: "row", alignItems: "center" }}>
+                  <Entypo name="video" size={25} color="white" />
+                  <Text style={{ color: "white", fontSize: 12, marginLeft: 5 }}>
+                    视频投稿
+                  </Text>
+                </View>
+
+                <View style={{ flexDirection: "row", alignItems: "center" }}>
+                  <FontAwesome5 name="gem" size={18} color="white" />
+                  <Text style={{ color: "white", fontSize: 12, marginLeft: 5 }}>
+                    我要认证
+                  </Text>
+                </View>
+              </View>
             </View>
           </View>
 
+          {/* Fifth Container */}
           <View style={{ marginVertical: gap / 1 }}>
-            <View style={{ backgroundColor: "brown" }}>
-              <Text>Fifth Container</Text>
+            <View
+              style={{
+                backgroundColor: "#262632",
+                height: 500,
+                borderRadius: 5,
+                padding: 12,
+              }}
+            >
+              <View
+                style={{
+                  marginHorizontal: 5,
+                  marginTop: 5,
+                }}
+              >
+                <View
+                  style={{
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    padding: 3,
+                  }}
+                >
+                  <Text style={{ color: "white", fontSize: 12 }}>历史记录</Text>
+                  <FontAwesome5 name="angle-right" size={20} color="#FFFFFF" />
+                </View>
+                <View
+                  style={{
+                    borderBottomColor: "white",
+                    borderBottomWidth: 1,
+                    marginTop: 10,
+                  }}
+                ></View>
+              </View>
+
+              <View
+                style={{
+                  marginHorizontal: 5,
+                  marginVertical: 15,
+                }}
+              >
+                <View
+                  style={{
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    padding: 3,
+                  }}
+                >
+                  <Text style={{ color: "white", fontSize: 12 }}>离线缓存</Text>
+                  <FontAwesome5 name="angle-right" size={20} color="#FFFFFF" />
+                </View>
+                <View
+                  style={{
+                    borderBottomColor: "white",
+                    borderBottomWidth: 1,
+                    marginTop: 10,
+                  }}
+                ></View>
+              </View>
+
+              <View
+                style={{
+                  marginHorizontal: 5,
+                }}
+              >
+                <View
+                  style={{
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    padding: 3,
+                  }}
+                >
+                  <Text style={{ color: "white", fontSize: 12 }}>分享推广</Text>
+                  <FontAwesome5 name="angle-right" size={20} color="#FFFFFF" />
+                </View>
+                <View
+                  style={{
+                    borderBottomColor: "white",
+                    borderBottomWidth: 1,
+                    marginTop: 10,
+                  }}
+                ></View>
+              </View>
+
+              <View
+                style={{
+                  marginHorizontal: 5,
+                  marginVertical: 15,
+                }}
+              >
+                <View
+                  style={{
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    padding: 3,
+                  }}
+                >
+                  <Text style={{ color: "white", fontSize: 12 }}>账号凭证</Text>
+                  <FontAwesome5 name="angle-right" size={20} color="#FFFFFF" />
+                </View>
+                <View
+                  style={{
+                    borderBottomColor: "white",
+                    borderBottomWidth: 1,
+                    marginTop: 10,
+                  }}
+                ></View>
+              </View>
+
+              <View
+                style={{
+                  marginHorizontal: 5,
+                }}
+              >
+                <View
+                  style={{
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    padding: 3,
+                  }}
+                >
+                  <Text style={{ color: "white", fontSize: 12 }}>在线客服</Text>
+                  <FontAwesome5 name="angle-right" size={20} color="#FFFFFF" />
+                </View>
+                <View
+                  style={{
+                    borderBottomColor: "white",
+                    borderBottomWidth: 1,
+                    marginTop: 10,
+                  }}
+                ></View>
+              </View>
+
+              <View
+                style={{
+                  marginHorizontal: 5,
+                  marginVertical: 15,
+                }}
+              >
+                <View
+                  style={{
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    padding: 3,
+                  }}
+                >
+                  <Text style={{ color: "white", fontSize: 12 }}>精品应用</Text>
+                  <FontAwesome5 name="angle-right" size={20} color="#FFFFFF" />
+                </View>
+                <View
+                  style={{
+                    borderBottomColor: "white",
+                    borderBottomWidth: 1,
+                    marginTop: 10,
+                  }}
+                ></View>
+              </View>
+
+              <View
+                style={{
+                  marginHorizontal: 5,
+                }}
+              >
+                <View
+                  style={{
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    padding: 3,
+                  }}
+                >
+                  <Text style={{ color: "white", fontSize: 12 }}>官方群组</Text>
+                  <FontAwesome5 name="angle-right" size={20} color="#FFFFFF" />
+                </View>
+                <View
+                  style={{
+                    borderBottomColor: "white",
+                    borderBottomWidth: 1,
+                    marginTop: 10,
+                  }}
+                ></View>
+              </View>
+
+              <View
+                style={{
+                  flexDirection: "row",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  padding: 15,
+                }}
+              >
+                <Text style={{ color: "white", fontSize: 12 }}>
+                  官方邮箱linnannan101@gmail.com
+                </Text>
+                <View
+                  style={{
+                    backgroundColor: "#FF474E",
+                    width: 55,
+                    height: 25,
+                    borderRadius: 10,
+                    justifyContent: "center",
+                    alignItems: "center",
+                    marginLeft: 10,
+                  }}
+                >
+                  <Text
+                    style={{
+                      color: "white",
+                      textAlign: "center",
+                      fontSize: 12,
+                    }}
+                  >
+                    复制
+                  </Text>
+                </View>
+              </View>
             </View>
           </View>
         </ScrollView>
