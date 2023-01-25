@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, {useEffect, useState} from "react";
 import {
   StyleSheet,
   Text,
@@ -9,7 +9,7 @@ import {
   StatusBar,
   Dimensions,
   Image,
-  FlatList, TouchableOpacity,
+  FlatList, TouchableOpacity
 } from "react-native";
 
 import {
@@ -25,14 +25,30 @@ import {
     MaterialIcons
 } from "@expo/vector-icons";
 import { transform } from "typescript";
-import {NavigationContainer} from "@react-navigation/native";
+import {NavigationContainer, useRoute} from "@react-navigation/native";
 import {useNavigation} from "@react-navigation/native";
 import {StackNavigationProp} from "@react-navigation/stack";
 import {RootStackParamList} from "../UserProfile";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const SettingsIcon = () => {
+const SettingsIcon = (props) => {
 
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
+    const [mainImage, setMainImage] = useState(require('../../assets/profilePhoto.jpg'));
+
+    useEffect(() => {
+        async function getData() {
+            try {
+                const value = await AsyncStorage.getItem('mainImage');
+                if(value !== null) {
+                    setMainImage(value);
+                }
+            } catch(e) {
+                console.log(e)
+            }
+        }
+        getData();
+    }, []);
 
   return(
       <ScrollView style={{flex: 1, maxHeight: Dimensions.get("window").height,
@@ -56,10 +72,18 @@ const SettingsIcon = () => {
                 <Text style={{color: 'white', fontSize: 15}}>头像</Text>
                 <TouchableOpacity onPress={() => navigation.navigate('ProfilePhoto')}>
                     <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                        <Image
-                            style={{ width: 40, height: 40, borderRadius: 20, marginRight: 10 }}
-                            source={require("../../assets/profilePhoto.jpg")}
-                        />
+                        {mainImage && (
+                            <Image
+                                style={{ width: 40, height: 40, borderRadius: 20, marginRight: 10 }}
+                                source={mainImage}
+                            />
+                        )}
+                        {!mainImage && (
+                            <Image
+                                style={{ width: 40, height: 40, borderRadius: 20, marginRight: 10 }}
+                                source={require('../../assets/profilePhoto.jpg')}
+                            />
+                        )}
                         <AntDesign name="right" size={18} color="white" />
                     </View>
                 </TouchableOpacity>
