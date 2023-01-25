@@ -36,6 +36,8 @@ const SettingsIcon = (props) => {
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
     const [mainImage, setMainImage] = useState(require('../../assets/profilePhoto.jpg'));
 
+    const [loading, setIsLoading] = useState(false);
+
     useEffect(() => {
         async function getData() {
             try {
@@ -43,6 +45,7 @@ const SettingsIcon = (props) => {
                 if(value !== null) {
                     setMainImage(value);
                 }
+                setIsLoading(mainImage);
             } catch(e) {
                 console.log(e)
             }
@@ -72,13 +75,12 @@ const SettingsIcon = (props) => {
                 <Text style={{color: 'white', fontSize: 15}}>头像</Text>
                 <TouchableOpacity onPress={() => navigation.navigate('ProfilePhoto')}>
                     <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                        {mainImage && (
+                        {mainImage ? (
                             <Image
                                 style={{ width: 40, height: 40, borderRadius: 20, marginRight: 10 }}
                                 source={mainImage}
                             />
-                        )}
-                        {!mainImage && (
+                        ) : (
                             <Image
                                 style={{ width: 40, height: 40, borderRadius: 20, marginRight: 10 }}
                                 source={require('../../assets/profilePhoto.jpg')}
