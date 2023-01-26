@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, {useState, useEffect} from "react";
 import {
   StyleSheet,
   Text,
@@ -32,14 +32,21 @@ export type RootStackParamList = {
     Settings: undefined;
     UserProfile: undefined;
     ProfilePhoto: undefined;
+    PetName: undefined;
+    BindRequest: undefined;
+    Introduction: undefined;
+    AccountCertificate: undefined;
 };
 
 import SettingsIcon from './UserProfileComponents/SettingsIcon';
+import {useSelector} from "react-redux";
 
 const UserProfile = ({}) => {
   const gap = 8;
 
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
+
+    const selectedImage = useSelector((store) => store['models'].selectedImage);
 
   return (
       <SafeAreaView style={{ flex: 1}}>
@@ -78,10 +85,18 @@ const UserProfile = ({}) => {
                 }}
               >
                 <View style={{ flexDirection: "row", padding: 10 }}>
-                  <Image
-                    style={{ width: 40, height: 40, borderRadius: 20 }}
-                    source={require("../assets/profilePhoto.jpg")}
-                  />
+                    {!selectedImage ? (
+                        <Image
+                            style={{ width: 40, height: 40, borderRadius: 20 }}
+                            source={require('../assets/profilePhoto.jpg')}
+                        />
+                    ) : (
+                        <Image
+                            style={{ width: 40, height: 40, borderRadius: 20 }}
+                            source={selectedImage}
+                            defaultSource={selectedImage}
+                        />
+                    )}
                   <View
                     style={{
                       flexDirection: "row",
@@ -139,7 +154,7 @@ const UserProfile = ({}) => {
                         flexDirection: "row",
                         alignItems: "center",
                         position: "absolute",
-                        left: 220,
+                        right: -100,
                       }}
                     >
                       <Text
