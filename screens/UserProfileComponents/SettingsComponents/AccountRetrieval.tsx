@@ -13,6 +13,7 @@ import Modal from 'react-native-modal';
 import {AntDesign, FontAwesome5} from "@expo/vector-icons";
 import {useNavigation} from "@react-navigation/native";
 import {Camera, CameraType} from 'expo-camera';
+import * as ImagePicker from "expo-image-picker";
 
 const AccountRetrieval = () => {
 
@@ -36,7 +37,21 @@ const AccountRetrieval = () => {
 
     const [isModalVisible, setModalVisible] = useState(false);
 
-    const MyText = () => {
+    const [image, setImage] = useState(null);
+    const pickImageFromGallery = async () => {
+        let result = await ImagePicker.launchImageLibraryAsync({
+            mediaTypes: ImagePicker.MediaTypeOptions.Images,
+            allowsEditing: true,
+            aspect: [4, 3],
+            quality: 1,
+        });
+
+        if (!result.cancelled) {
+            setImage(result.uri);
+        }
+    }
+
+    const ButtonModal = () => {
         return (
             <View style={{marginHorizontal: 20}}>
                 <TouchableOpacity
@@ -66,6 +81,7 @@ const AccountRetrieval = () => {
                         borderRadius: 5,
                         marginVertical: 7
                     }}
+                    onPress={pickImageFromGallery}
                 >
                     <Text style={{color: '#FFFFFF', textAlign: 'center'}}>上传凭证</Text>
                 </TouchableOpacity>
@@ -107,7 +123,7 @@ const AccountRetrieval = () => {
                 style={styles.modalContainer}
             >
                 <View style={styles.modal}>
-                    <MyText/>
+                    <ButtonModal/>
                 </View>
             </Modal>
 

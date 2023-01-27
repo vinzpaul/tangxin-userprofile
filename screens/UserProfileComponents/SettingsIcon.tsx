@@ -224,7 +224,7 @@ const SettingsIcon = (props) => {
                 </TouchableOpacity>
 
                 {/*Mobile Number*/}
-                <TouchableOpacity onPress={() => navigation.navigate('BindRequest')}>
+                <TouchableOpacity onPress={() => navigation.navigate('MobileBindRequest')}>
                     <View style={styles.sectionContainer}>
                         <Text style={styles.sectionTitle}>手机号</Text>
                         <View style={styles.sectionInnerContainer}>

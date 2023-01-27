@@ -2,7 +2,7 @@ import {Alert, Dimensions, ScrollView, Text, TouchableOpacity, View} from "react
 import React, {useState, useEffect} from "react";
 import {Camera, CameraType} from 'expo-camera';
 import * as ImagePicker from 'expo-image-picker';
-import {MaterialIcons, FontAwesome} from '@expo/vector-icons';
+import {MaterialIcons, FontAwesome, Fontisto} from '@expo/vector-icons';
 import {useNavigation} from "@react-navigation/native";
 
 const CameraInit = () => {
@@ -78,8 +78,9 @@ const CameraInit = () => {
                         }}>
                     </View>
 
-                    <TouchableOpacity onPress={() => navigate.navigate('AccountRetrieval')}>
-                        <Text style={{color: '#FFFFFF'}}>AAAA</Text>
+                    <TouchableOpacity onPress={() => navigate.navigate('AccountRetrieval')}
+                                      style={{position: 'absolute', right: 25, top: 20}}>
+                        <Fontisto name="close-a" size={24} color="white"/>
                     </TouchableOpacity>
                 </Camera>
 
@@ -90,10 +91,7 @@ const CameraInit = () => {
                     justifyContent: 'space-evenly'
                 }}>
 
-                    <TouchableOpacity style={{
-                        // position: 'absolute',
-                        // left: 50
-                    }} onPress={pickImageFromGallery}>
+                    <TouchableOpacity onPress={pickImageFromGallery}>
                         <FontAwesome name="photo" size={44} color="white"/>
                     </TouchableOpacity>
 

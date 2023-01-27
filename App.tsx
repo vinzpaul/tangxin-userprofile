@@ -23,7 +23,7 @@ import UserProfile from "./screens/UserProfile";
 import SettingsIcon from "./screens/UserProfileComponents/SettingsIcon";
 import ProfilePhoto from "./screens/UserProfileComponents/SettingsComponents/ProfilePhoto";
 import PetName from "./screens/UserProfileComponents/SettingsComponents/PetName";
-import BindRequest from "./screens/UserProfileComponents/SettingsComponents/BindRequest";
+import MobileBindRequest from "./screens/UserProfileComponents/SettingsComponents/MobileBindRequest";
 import Introduction from "./screens/UserProfileComponents/SettingsComponents/Introduction";
 import AccountCertificate from "./screens/UserProfileComponents/SettingsComponents/AccountCertificate";
 import AccountRetrieval from "./screens/UserProfileComponents/SettingsComponents/AccountRetrieval";
@@ -48,7 +48,7 @@ const App: React.FC = (props: Props) => {
                         <Stack.Screen name="Settings" component={SettingsIcon}/>
                         <Stack.Screen name="ProfilePhoto" component={ProfilePhoto}/>
                         <Stack.Screen name="PetName" component={PetName}/>
-                        <Stack.Screen name="BindRequest" component={BindRequest}/>
+                        <Stack.Screen name="MobileBindRequest" component={MobileBindRequest}/>
                         <Stack.Screen name="Introduction" component={Introduction}/>
 
                         <Stack.Screen name="AccountCertificate" component={AccountCertificate}/>

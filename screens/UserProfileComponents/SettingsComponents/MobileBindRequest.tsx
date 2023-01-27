@@ -16,7 +16,7 @@ import {useNavigation} from "@react-navigation/native";
 import {StackNavigationProp} from "@react-navigation/stack";
 import {RootStackParamList} from "../../UserProfile";
 
-const BindRequest = () => {
+const MobileBindRequest = () => {
 
     const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
 
@@ -95,4 +95,4 @@ const BindRequest = () => {
     )
 }
 
-export default BindRequest;
+export default MobileBindRequest;
