@@ -1,15 +1,12 @@
-import React, {useState, useEffect} from "react";
+import React from "react";
 import {
     StyleSheet,
     Text,
     View,
     ScrollView,
     SafeAreaView,
-    SectionList,
-    StatusBar,
     Dimensions,
     Image,
-    FlatList,
     TouchableOpacity,
 } from "react-native";
 
@@ -21,12 +18,9 @@ import {
     Foundation,
     Entypo,
 } from "@expo/vector-icons";
-import {transform} from "typescript";
 
-import {NavigationContainer} from "@react-navigation/native";
 import {useNavigation} from "@react-navigation/native";
 import {StackNavigationProp} from '@react-navigation/stack';
-import {RouteProp} from '@react-navigation/native';
 
 export type RootStackParamList = {
     Settings: undefined;
@@ -40,10 +34,9 @@ export type RootStackParamList = {
     MobileRetrieval: undefined;
     CameraInit: undefined;
 };
-
-import SettingsIcon from './UserProfileComponents/SettingsIcon';
 import {useSelector} from "react-redux";
 
+//Used for CSS Custom Gap
 const gap = 8;
 const UserProfile = ({}) => {
 
