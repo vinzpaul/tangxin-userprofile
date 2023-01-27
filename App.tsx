@@ -31,6 +31,7 @@ import AccountCertificate from "./screens/UserProfileComponents/SettingsComponen
 import AccountRetrieval from "./screens/UserProfileComponents/SettingsComponents/AccountRetrieval";
 import MobileRetrieval
     from "./screens/UserProfileComponents/SettingsComponents/AccountRetrievalComponents/MobileRetrieval";
+import CameraInit from './screens/UserProfileComponents/SettingsComponents/AccountRetrievalComponents/CameraInit'
 
 type Props = {};
 const App: React.FC = (props: Props) => {
@@ -55,6 +56,7 @@ const App: React.FC = (props: Props) => {
                         <Stack.Screen name="AccountCertificate" component={AccountCertificate}/>
                         <Stack.Screen name="AccountRetrieval" component={AccountRetrieval}/>
                         <Stack.Screen name="MobileRetrieval" component={MobileRetrieval}/>
+                        <Stack.Screen name="CameraInit" component={CameraInit}/>
                     </Stack.Group>
                 </Stack.Navigator>
             </NavigationContainer>

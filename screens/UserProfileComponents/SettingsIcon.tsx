@@ -72,7 +72,6 @@ const SettingsIcon = (props) => {
 
         const handlePress = async (id) => {
             setSelected(id);
-            // setImage(id === 1 ? <Ionicons name="male" size={24} color="#4362A5" /> : <Ionicons name="female" size={24} color="#FF474E" /> )
         }
 
         const handlePress2 = async (id) => {
@@ -507,11 +506,8 @@ const styles = StyleSheet.create({
     },
     modal: {
         backgroundColor: '#262632',
-        // padding: 22,
         height: Dimensions.get('window').height / 5,
         top: 290,
-        // justifyContent: 'center',
-        // alignItems: 'center',
         borderRadius: 4,
         borderColor: 'rgba(0, 0, 0, 0.1)',
     },

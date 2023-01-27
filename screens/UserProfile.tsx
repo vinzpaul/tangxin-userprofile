@@ -38,133 +38,88 @@ export type RootStackParamList = {
     AccountCertificate: undefined;
     AccountRetrieval: undefined;
     MobileRetrieval: undefined;
+    CameraInit: undefined;
 };
 
 import SettingsIcon from './UserProfileComponents/SettingsIcon';
 import {useSelector} from "react-redux";
 
+const gap = 8;
 const UserProfile = ({}) => {
-    const gap = 8;
 
     const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
 
     const selectedImage = useSelector((store) => store['models'].selectedImage);
 
     return (
-        <SafeAreaView style={{flex: 1}}>
+        <SafeAreaView style={styles.safeAreaView}>
             <View
-                style={{
-                    flex: 1,
-                    maxHeight: Dimensions.get("window").height,
-                    marginHorizontal: 15,
-                    marginVertical: 20,
-                }}
+                style={styles.container}
             >
                 <ScrollView
-                    style={{flex: 1, paddingVertical: gap / -2}}
+                    style={styles.scrollView}
                     showsVerticalScrollIndicator={false}
                 >
-                    {/* First Container */}
-                    <View style={{marginVertical: gap / 1}}>
+                    {/* First Container and Settings Icon */}
+                    <View style={styles.innerContainer}>
                         <View
-                            style={{
-                                display: "flex",
-                                alignItems: "flex-end",
-                                padding: 10,
-                                flex: 1,
-                            }}
+                            style={styles.settingsIcon}
                         >
                             <TouchableOpacity onPress={() => navigation.navigate('Settings')}>
                                 <EvilIcons name="gear" size={28} color="white"/>
                             </TouchableOpacity>
                         </View>
+
                         <View
-                            style={{
-                                backgroundColor: "#262632",
-                                borderRadius: 5,
-                                height: 100,
-                                flex: 1,
-                            }}
+                            style={styles.firstContainer}
                         >
-                            <View style={{flexDirection: "row", padding: 10}}>
+                            <View style={styles.profilePhotoContainer}>
                                 {!selectedImage ? (
                                     <Image
-                                        style={{width: 40, height: 40, borderRadius: 20}}
+                                        style={styles.profilePhoto}
                                         source={require('../assets/profilePhoto.jpg')}
                                     />
                                 ) : (
                                     <Image
-                                        style={{width: 40, height: 40, borderRadius: 20}}
+                                        style={styles.profilePhoto}
                                         source={selectedImage}
                                         defaultSource={selectedImage}
                                     />
                                 )}
                                 <View
-                                    style={{
-                                        flexDirection: "row",
-                                        alignItems: "center",
-                                        paddingLeft: 8,
-                                    }}
+                                    style={styles.profileDetails}
                                 >
                                     <View>
                                         <Text
-                                            style={{
-                                                color: "white",
-                                                fontSize: 15,
-                                                fontWeight: "600",
-                                            }}
+                                            style={styles.profileName}
                                         >
                                             受伤的期待
                                         </Text>
                                         <View
-                                            style={{
-                                                flexDirection: "row",
-                                                paddingHorizontal: gap / -2,
-                                            }}
+                                            style={styles.coinTicketFreeWatchContainer}
                                         >
                                             <Text
-                                                style={{
-                                                    color: "white",
-                                                    fontSize: 11,
-                                                    // marginHorizontal: gap / 2,
-                                                }}
+                                                style={styles.goldCoin}
                                             >
                                                 金币: 0
                                             </Text>
                                             <Text
-                                                style={{
-                                                    color: "white",
-                                                    fontSize: 11,
-                                                    marginHorizontal: gap / 2,
-                                                }}
+                                                style={styles.profileDetails2}
                                             >
                                                 观影券: 0
                                             </Text>
                                             <Text
-                                                style={{
-                                                    color: "white",
-                                                    fontSize: 11,
-                                                    marginHorizontal: gap / 2,
-                                                }}
+                                                style={styles.profileDetails2}
                                             >
                                                 免费观看 : 0
                                             </Text>
                                         </View>
                                     </View>
                                     <View
-                                        style={{
-                                            flexDirection: "row",
-                                            alignItems: "center",
-                                            position: "absolute",
-                                            right: -100,
-                                        }}
+                                        style={styles.homeButtonContainer}
                                     >
                                         <Text
-                                            style={{
-                                                color: "white",
-                                                fontSize: 13,
-                                                marginRight: 5,
-                                            }}
+                                            style={styles.homeButton}
                                         >
                                             主页
                                         </Text>
@@ -177,32 +132,23 @@ const UserProfile = ({}) => {
                                 </View>
                             </View>
                             <View
-                                style={{
-                                    borderTopColor: "white",
-                                    borderTopWidth: StyleSheet.hairlineWidth,
-                                    marginHorizontal: 10,
-                                }}
+                                style={styles.horizontalRule}
                             ></View>
                             <View
-                                style={{
-                                    flexDirection: "row",
-                                    justifyContent: "space-between",
-                                    marginHorizontal: 50,
-                                    paddingTop: 5,
-                                }}
+                                style={styles.profileDetails3}
                             >
                                 <Text
-                                    style={{color: "white", fontSize: 13, fontWeight: "600"}}
+                                    style={styles.profileDetails3Text}
                                 >
                                     动态 0
                                 </Text>
                                 <Text
-                                    style={{color: "white", fontSize: 13, fontWeight: "600"}}
+                                    style={styles.profileDetails3Text}
                                 >
                                     关注 0
                                 </Text>
                                 <Text
-                                    style={{color: "white", fontSize: 13, fontWeight: "600"}}
+                                    style={styles.profileDetails3Text}
                                 >
                                     粉丝 0
                                 </Text>
@@ -211,45 +157,29 @@ const UserProfile = ({}) => {
                     </View>
 
                     {/* Second Container */}
-                    <View style={{marginVertical: gap / 1}}>
+                    <View style={styles.innerContainer}>
                         <View
-                            style={{
-                                backgroundColor: "#FDE5C3",
-                                borderRadius: 10,
-                                height: 50,
-                                padding: 5,
-                            }}
+                            style={styles.secondContainer}
                         >
                             <View
-                                style={{
-                                    flexDirection: "row",
-                                    alignItems: "center",
-                                    marginHorizontal: 10,
-                                }}
+                                style={styles.vipContainer}
                             >
                                 <FontAwesome5 name="medal" size={28} color="#996B3C"/>
-                                <View style={{marginLeft: 5}}>
-                                    <Text style={{color: "#996B3C", fontWeight: "600"}}>
+                                <View style={styles.medalToTextMargin}>
+                                    <Text style={styles.secondContainerTitle}>
                                         开通会员
                                     </Text>
                                     <View
-                                        style={{
-                                            borderWidth: 1,
-                                            borderRadius: 5,
-                                            borderColor: "#996B3C",
-                                        }}
+                                        style={styles.secondContainerDetailsBorder}
                                     >
                                         <Text
-                                            style={{
-                                                color: "#996B3C",
-                                                marginHorizontal: 10,
-                                            }}
+                                            style={styles.secondContainerDetails}
                                         >
                                             享无限观看，购片折扣等权益
                                         </Text>
                                     </View>
                                 </View>
-                                <View style={{position: "absolute", right: 5}}>
+                                <View style={styles.secondContainerArrowBtn}>
                                     <FontAwesome5
                                         name="angle-right"
                                         size={25}
@@ -261,43 +191,26 @@ const UserProfile = ({}) => {
                     </View>
 
                     {/* Third Container */}
-                    <View style={{marginVertical: gap / 1}}>
+                    <View style={styles.innerContainer}>
                         <View
-                            style={{
-                                backgroundColor: "#262632",
-                                height: 80,
-                                borderRadius: 5,
-                            }}
+                            style={styles.thirdContainer}
                         >
                             <View
-                                style={{
-                                    flex: 1,
-                                    flexDirection: "row",
-                                    justifyContent: "space-evenly",
-                                    marginHorizontal: -15,
-                                }}
+                                style={styles.thirdContainerContent}
                             >
                                 <View
-                                    style={{
-                                        justifyContent: "center",
-                                        alignItems: "center",
-                                    }}
+                                    style={styles.iconAndTextArrangement}
                                 >
                                     <Ionicons name="ribbon-sharp" size={25} color="white"/>
                                     <Text
-                                        style={{
-                                            color: "white",
-                                            textAlign: "center",
-                                            fontSize: 12,
-                                            marginTop: 5,
-                                        }}
+                                        style={styles.thirdContainerText}
                                     >
                                         升级会员
                                     </Text>
                                 </View>
 
                                 <View
-                                    style={{justifyContent: "center", alignItems: "center"}}
+                                    style={styles.iconAndTextArrangement}
                                 >
                                     <Ionicons
                                         name="md-wallet-outline"
@@ -305,19 +218,14 @@ const UserProfile = ({}) => {
                                         color="white"
                                     />
                                     <Text
-                                        style={{
-                                            color: "white",
-                                            textAlign: "center",
-                                            fontSize: 12,
-                                            marginTop: 5,
-                                        }}
+                                        style={styles.thirdContainerText}
                                     >
                                         我的卡包
                                     </Text>
                                 </View>
 
                                 <View
-                                    style={{justifyContent: "center", alignItems: "center"}}
+                                    style={styles.iconAndTextArrangement}
                                 >
                                     <FontAwesome5
                                         name="envelope-open-text"
@@ -325,28 +233,18 @@ const UserProfile = ({}) => {
                                         color="white"
                                     />
                                     <Text
-                                        style={{
-                                            color: "white",
-                                            textAlign: "center",
-                                            fontSize: 12,
-                                            marginTop: 5,
-                                        }}
+                                        style={styles.thirdContainerText}
                                     >
                                         我的收藏
                                     </Text>
                                 </View>
 
                                 <View
-                                    style={{justifyContent: "center", alignItems: "center"}}
+                                    style={styles.iconAndTextArrangement}
                                 >
                                     <Feather name="shopping-cart" size={25} color="white"/>
                                     <Text
-                                        style={{
-                                            color: "white",
-                                            textAlign: "center",
-                                            fontSize: 12,
-                                            marginTop: 5,
-                                        }}
+                                        style={styles.thirdContainerText}
                                     >
                                         我的购买
                                     </Text>
@@ -356,27 +254,15 @@ const UserProfile = ({}) => {
                     </View>
 
                     {/* Fourth Container */}
-                    <View style={{marginVertical: gap / 1}}>
+                    <View style={styles.innerContainer}>
                         <View
-                            style={{
-                                backgroundColor: "#262632",
-                                height: 50,
-                                borderRadius: 5,
-                                justifyContent: "center",
-                            }}
+                            style={styles.fourthContainer}
                         >
                             <View
-                                style={{
-                                    flexDirection: "row",
-                                    justifyContent: "space-evenly",
-                                    marginHorizontal: -15,
-                                }}
+                                style={styles.fourthContainerContent}
                             >
                                 <View
-                                    style={{
-                                        flexDirection: "row",
-                                        alignItems: "center",
-                                    }}
+                                    style={styles.fourthIconsAndTextArrangement}
                                 >
                                     <Foundation
                                         name="clipboard-pencil"
@@ -384,25 +270,25 @@ const UserProfile = ({}) => {
                                         color="white"
                                     />
                                     <Text
-                                        style={{color: "white", fontSize: 12, marginLeft: 5}}
+                                        style={styles.fourthText}
                                     >
                                         发布动态
                                     </Text>
                                 </View>
 
-                                <View style={{flexDirection: "row", alignItems: "center"}}>
+                                <View style={styles.fourthIconsAndTextArrangement}>
                                     <Entypo name="video" size={25} color="white"/>
                                     <Text
-                                        style={{color: "white", fontSize: 12, marginLeft: 5}}
+                                        style={styles.fourthText}
                                     >
                                         视频投稿
                                     </Text>
                                 </View>
 
-                                <View style={{flexDirection: "row", alignItems: "center"}}>
+                                <View style={styles.fourthIconsAndTextArrangement}>
                                     <FontAwesome5 name="gem" size={18} color="white"/>
                                     <Text
-                                        style={{color: "white", fontSize: 12, marginLeft: 5}}
+                                        style={styles.fourthText}
                                     >
                                         我要认证
                                     </Text>
@@ -412,30 +298,17 @@ const UserProfile = ({}) => {
                     </View>
 
                     {/* Fifth Container */}
-                    <View style={{marginVertical: gap / 1}}>
+                    <View style={styles.innerContainer}>
                         <View
-                            style={{
-                                backgroundColor: "#262632",
-                                height: 450,
-                                borderRadius: 5,
-                                padding: 12,
-                            }}
+                            style={styles.fifthContainer}
                         >
                             <View
-                                style={{
-                                    marginHorizontal: 5,
-                                    marginTop: 5,
-                                }}
+                                style={styles.sectionContainer}
                             >
                                 <View
-                                    style={{
-                                        flexDirection: "row",
-                                        justifyContent: "space-between",
-                                        alignItems: "center",
-                                        padding: 3,
-                                    }}
+                                    style={styles.textAndBtn}
                                 >
-                                    <Text style={{color: "white", fontSize: 12}}>
+                                    <Text style={styles.fifthText}>
                                         历史记录
                                     </Text>
                                     <FontAwesome5
@@ -445,29 +318,17 @@ const UserProfile = ({}) => {
                                     />
                                 </View>
                                 <View
-                                    style={{
-                                        borderBottomColor: "white",
-                                        borderBottomWidth: 1,
-                                        marginTop: 10,
-                                    }}
+                                    style={styles.fifthHorizontalRule}
                                 ></View>
                             </View>
 
                             <View
-                                style={{
-                                    marginHorizontal: 5,
-                                    marginVertical: 15,
-                                }}
+                                style={styles.sectionContainer}
                             >
                                 <View
-                                    style={{
-                                        flexDirection: "row",
-                                        justifyContent: "space-between",
-                                        alignItems: "center",
-                                        padding: 3,
-                                    }}
+                                    style={styles.textAndBtn}
                                 >
-                                    <Text style={{color: "white", fontSize: 12}}>
+                                    <Text style={styles.fifthText}>
                                         离线缓存
                                     </Text>
                                     <FontAwesome5
@@ -477,28 +338,17 @@ const UserProfile = ({}) => {
                                     />
                                 </View>
                                 <View
-                                    style={{
-                                        borderBottomColor: "white",
-                                        borderBottomWidth: 1,
-                                        marginTop: 10,
-                                    }}
+                                    style={styles.fifthHorizontalRule}
                                 ></View>
                             </View>
 
                             <View
-                                style={{
-                                    marginHorizontal: 5,
-                                }}
+                                style={styles.sectionContainer}
                             >
                                 <View
-                                    style={{
-                                        flexDirection: "row",
-                                        justifyContent: "space-between",
-                                        alignItems: "center",
-                                        padding: 3,
-                                    }}
+                                    style={styles.textAndBtn}
                                 >
-                                    <Text style={{color: "white", fontSize: 12}}>
+                                    <Text style={styles.fifthText}>
                                         分享推广
                                     </Text>
                                     <FontAwesome5
@@ -508,29 +358,17 @@ const UserProfile = ({}) => {
                                     />
                                 </View>
                                 <View
-                                    style={{
-                                        borderBottomColor: "white",
-                                        borderBottomWidth: 1,
-                                        marginTop: 10,
-                                    }}
+                                    style={styles.fifthHorizontalRule}
                                 ></View>
                             </View>
 
                             <View
-                                style={{
-                                    marginHorizontal: 5,
-                                    marginVertical: 15,
-                                }}
+                                style={styles.sectionContainer}
                             >
                                 <View
-                                    style={{
-                                        flexDirection: "row",
-                                        justifyContent: "space-between",
-                                        alignItems: "center",
-                                        padding: 3,
-                                    }}
+                                    style={styles.textAndBtn}
                                 >
-                                    <Text style={{color: "white", fontSize: 12}}>
+                                    <Text style={styles.fifthText}>
                                         账号凭证
                                     </Text>
                                     <FontAwesome5
@@ -540,28 +378,17 @@ const UserProfile = ({}) => {
                                     />
                                 </View>
                                 <View
-                                    style={{
-                                        borderBottomColor: "white",
-                                        borderBottomWidth: 1,
-                                        marginTop: 10,
-                                    }}
+                                    style={styles.fifthHorizontalRule}
                                 ></View>
                             </View>
 
                             <View
-                                style={{
-                                    marginHorizontal: 5,
-                                }}
+                                style={styles.sectionContainer}
                             >
                                 <View
-                                    style={{
-                                        flexDirection: "row",
-                                        justifyContent: "space-between",
-                                        alignItems: "center",
-                                        padding: 3,
-                                    }}
+                                    style={styles.textAndBtn}
                                 >
-                                    <Text style={{color: "white", fontSize: 12}}>
+                                    <Text style={styles.fifthText}>
                                         在线客服
                                     </Text>
                                     <FontAwesome5
@@ -571,29 +398,17 @@ const UserProfile = ({}) => {
                                     />
                                 </View>
                                 <View
-                                    style={{
-                                        borderBottomColor: "white",
-                                        borderBottomWidth: 1,
-                                        marginTop: 10,
-                                    }}
+                                    style={styles.fifthHorizontalRule}
                                 ></View>
                             </View>
 
                             <View
-                                style={{
-                                    marginHorizontal: 5,
-                                    marginVertical: 15,
-                                }}
+                                style={styles.sectionContainer}
                             >
                                 <View
-                                    style={{
-                                        flexDirection: "row",
-                                        justifyContent: "space-between",
-                                        alignItems: "center",
-                                        padding: 3,
-                                    }}
+                                    style={styles.textAndBtn}
                                 >
-                                    <Text style={{color: "white", fontSize: 12}}>
+                                    <Text style={styles.fifthText}>
                                         精品应用
                                     </Text>
                                     <FontAwesome5
@@ -603,28 +418,17 @@ const UserProfile = ({}) => {
                                     />
                                 </View>
                                 <View
-                                    style={{
-                                        borderBottomColor: "white",
-                                        borderBottomWidth: 1,
-                                        marginTop: 10,
-                                    }}
+                                    style={styles.fifthHorizontalRule}
                                 ></View>
                             </View>
 
                             <View
-                                style={{
-                                    marginHorizontal: 5,
-                                }}
+                                style={styles.sectionContainer}
                             >
                                 <View
-                                    style={{
-                                        flexDirection: "row",
-                                        justifyContent: "space-between",
-                                        alignItems: "center",
-                                        padding: 3,
-                                    }}
+                                    style={styles.textAndBtn}
                                 >
-                                    <Text style={{color: "white", fontSize: 12}}>
+                                    <Text style={styles.fifthText}>
                                         官方群组
                                     </Text>
                                     <FontAwesome5
@@ -634,46 +438,27 @@ const UserProfile = ({}) => {
                                     />
                                 </View>
                                 <View
-                                    style={{
-                                        borderBottomColor: "white",
-                                        borderBottomWidth: 1,
-                                        marginTop: 10,
-                                    }}
+                                    style={styles.fifthHorizontalRule}
                                 ></View>
                             </View>
 
                             <View
-                                style={{
-                                    flexDirection: "row",
-                                    alignItems: "center",
-                                    justifyContent: "center",
-                                    padding: 15,
-                                }}
+                                style={styles.emailContainer}
                             >
-                                <Text style={{color: "white", fontSize: 12}}>
+                                <Text style={styles.fifthText}>
                                     官方邮箱linnannan101@gmail.com
                                 </Text>
-                                <View
-                                    style={{
-                                        backgroundColor: "#FF474E",
-                                        width: 55,
-                                        height: 25,
-                                        borderRadius: 10,
-                                        justifyContent: "center",
-                                        alignItems: "center",
-                                        marginLeft: 10,
-                                    }}
-                                >
-                                    <Text
-                                        style={{
-                                            color: "white",
-                                            textAlign: "center",
-                                            fontSize: 12,
-                                        }}
+                                <TouchableOpacity>
+                                    <View
+                                        style={styles.copyBtnContainer}
                                     >
-                                        复制
-                                    </Text>
-                                </View>
+                                        <Text
+                                            style={styles.copyBtn}
+                                        >
+                                            复制
+                                        </Text>
+                                    </View>
+                                </TouchableOpacity>
                             </View>
                         </View>
                     </View>
@@ -683,6 +468,211 @@ const UserProfile = ({}) => {
     );
 };
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+    safeAreaView: {
+        flex: 1
+    },
+    scrollView: {
+        flex: 1,
+        paddingVertical: gap / -2
+    },
+    container: {
+        flex: 1,
+        maxHeight: Dimensions.get("window").height,
+        marginHorizontal: 15,
+        marginVertical: 20,
+    },
+    innerContainer: {
+        marginVertical: gap / 1
+    },
+    settingsIcon: {
+        display: "flex",
+        alignItems: "flex-end",
+        padding: 10,
+        flex: 1,
+    },
+
+    // First Container
+    firstContainer: {
+        backgroundColor: "#262632",
+        borderRadius: 5,
+        height: 100,
+        flex: 1,
+    },
+    profilePhotoContainer: {
+        flexDirection: "row", padding: 10
+    },
+    profilePhoto: {
+        width: 40, height: 40, borderRadius: 20
+    },
+    profileDetails: {
+        flexDirection: "row",
+        alignItems: "center",
+        paddingLeft: 8,
+    },
+    profileName: {
+        color: "white",
+        fontSize: 15,
+        fontWeight: "600",
+    },
+    coinTicketFreeWatchContainer: {
+        flexDirection: "row",
+        paddingHorizontal: gap / -2,
+    },
+    goldCoin: {
+        color: "white",
+        fontSize: 11,
+    },
+    profileDetails2: {
+        color: "white",
+        fontSize: 11,
+        marginHorizontal: gap / 2,
+    },
+    homeButtonContainer: {
+        flexDirection: "row",
+        alignItems: "center",
+        position: "absolute",
+        right: -100,
+    },
+    homeButton: {
+        color: "white",
+        fontSize: 13,
+        marginRight: 5,
+    },
+    horizontalRule: {
+        borderTopColor: "white",
+        borderTopWidth: StyleSheet.hairlineWidth,
+        marginHorizontal: 10,
+    },
+    profileDetails3: {
+        flexDirection: "row",
+        justifyContent: "space-between",
+        marginHorizontal: 50,
+        paddingTop: 5,
+    },
+    profileDetails3Text: {
+        color: "white", fontSize: 13, fontWeight: "600"
+    },
+
+    // Second Container
+    secondContainer: {
+        backgroundColor: "#FDE5C3",
+        borderRadius: 10,
+        height: 50,
+        padding: 5,
+    },
+    vipContainer: {
+        flexDirection: "row",
+        alignItems: "center",
+        marginHorizontal: 10,
+    },
+    medalToTextMargin: {
+        marginLeft: 5
+    },
+    secondContainerTitle: {
+        color: "#996B3C", fontWeight: "600"
+    },
+    secondContainerDetailsBorder: {
+        borderWidth: 1,
+        borderRadius: 5,
+        borderColor: "#996B3C",
+    },
+    secondContainerDetails: {
+        color: "#996B3C",
+        marginHorizontal: 10,
+    },
+    secondContainerArrowBtn: {
+        position: "absolute", right: 5
+    },
+
+    //Third Container
+    thirdContainer: {
+        backgroundColor: "#262632",
+        height: 80,
+        borderRadius: 5,
+    },
+    thirdContainerContent: {
+        flex: 1,
+        flexDirection: "row",
+        justifyContent: "space-evenly",
+        marginHorizontal: -15,
+    },
+    iconAndTextArrangement: {
+        justifyContent: "center",
+        alignItems: "center",
+    },
+    thirdContainerText: {
+        color: "white",
+        textAlign: "center",
+        fontSize: 12,
+        marginTop: 5,
+    },
+
+    // Fourth Container
+    fourthContainer: {
+        backgroundColor: "#262632",
+        height: 50,
+        borderRadius: 5,
+        justifyContent: "center",
+    },
+    fourthContainerContent: {
+        flexDirection: "row",
+        justifyContent: "space-evenly",
+        marginHorizontal: -15,
+    },
+    fourthIconsAndTextArrangement: {
+        flexDirection: "row",
+        alignItems: "center",
+    },
+    fourthText: {
+        color: "white", fontSize: 12, marginLeft: 5
+    },
+
+    // Fifth Container
+    fifthContainer: {
+        backgroundColor: "#262632",
+        height: 450,
+        borderRadius: 5,
+        padding: 12,
+    },
+    sectionContainer: {
+        marginHorizontal: 5,
+        marginTop: 10,
+    },
+    textAndBtn: {
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: "center",
+        padding: 3,
+    },
+    fifthText: {
+        color: "white", fontSize: 12
+    },
+    fifthHorizontalRule: {
+        borderBottomColor: "white",
+        borderBottomWidth: 1,
+        marginTop: 10,
+    },
+    emailContainer: {
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "center",
+        padding: 15,
+    },
+    copyBtnContainer: {
+        backgroundColor: "#FF474E",
+        width: 55,
+        height: 25,
+        borderRadius: 10,
+        justifyContent: "center",
+        alignItems: "center",
+        marginLeft: 10,
+    },
+    copyBtn: {
+        color: "white",
+        textAlign: "center",
+        fontSize: 12,
+    }
+});
 
 export default UserProfile;

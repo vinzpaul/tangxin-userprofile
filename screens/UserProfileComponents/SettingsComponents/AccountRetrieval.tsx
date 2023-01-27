@@ -7,11 +7,12 @@ import {
     Text,
     TouchableOpacity,
     View,
-    PanResponder,
-    Modal
+    PanResponder, Button
 } from "react-native";
+import Modal from 'react-native-modal';
 import {AntDesign, FontAwesome5} from "@expo/vector-icons";
 import {useNavigation} from "@react-navigation/native";
+import {Camera, CameraType} from 'expo-camera';
 
 const AccountRetrieval = () => {
 
@@ -33,7 +34,58 @@ const AccountRetrieval = () => {
 
     const [containerPosition, setContainerPosition] = useState(0);
 
-    const [modalVisible, setModalVisible] = useState(false);
+    const [isModalVisible, setModalVisible] = useState(false);
+
+    const MyText = () => {
+        return (
+            <View style={{marginHorizontal: 20}}>
+                <TouchableOpacity
+                    style={{
+                        backgroundColor: '#262632',
+                        height: 40,
+                        justifyContent: 'center',
+                        borderColor: 'grey',
+                        borderWidth: 1,
+                        borderRadius: 5
+                    }}
+                    onPress={() => {
+                        setModalVisible(false);
+                        navigation.navigate('CameraInit')
+                    }}
+                >
+                    <Text style={{color: '#FFFFFF', textAlign: 'center'}}>扫描凭证</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity
+                    style={{
+                        backgroundColor: '#262632',
+                        height: 40,
+                        justifyContent: 'center',
+                        borderColor: 'grey',
+                        borderWidth: 1,
+                        borderRadius: 5,
+                        marginVertical: 7
+                    }}
+                >
+                    <Text style={{color: '#FFFFFF', textAlign: 'center'}}>上传凭证</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity
+                    style={{
+                        backgroundColor: '#262632',
+                        height: 40,
+                        justifyContent: 'center',
+                        borderColor: 'grey',
+                        borderWidth: 1,
+                        borderRadius: 5
+                    }}
+                    onPress={() => setModalVisible(false)}
+                >
+                    <Text style={{color: '#FFFFFF', textAlign: 'center'}}>取消</Text>
+                </TouchableOpacity>
+            </View>
+        )
+    }
 
     return (
         // ===================================================================
@@ -43,72 +95,22 @@ const AccountRetrieval = () => {
             marginVertical: 20,
             maxWidth: Dimensions.get("window").width,
         }}>
-            <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-                <TouchableOpacity
-                    onPress={() => setModalVisible(true)}
-                    style={{
-                        backgroundColor: 'blue',
-                        padding: 10,
-                        borderRadius: 5,
-                    }}
-                >
-                    <Text style={{color: 'white'}}>Open Modal</Text>
-                </TouchableOpacity>
-                <Modal
-                    animationType="slide"
-                    transparent={false}
-                    visible={modalVisible}
-                    onRequestClose={() => setModalVisible(false)}
-                >
-                    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-                        <View style={{flexDirection: 'column'}}>
-                            <TouchableOpacity
-                                onPress={() => alert('Button 1 pressed')}
-                                style={{
-                                    backgroundColor: 'green',
-                                    padding: 10,
-                                    borderRadius: 5,
-                                    marginBottom: 10,
-                                }}
-                            >
-                                <Text style={{color: 'white'}}>Button 1</Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity
-                                onPress={() => alert('Button 2 pressed')}
-                                style={{
-                                    backgroundColor: 'green',
-                                    padding: 10,
-                                    borderRadius: 5,
-                                    marginBottom: 10,
-                                }}
-                            >
-                                <Text style={{color: 'white'}}>Button 2</Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity
-                                onPress={() => alert('Button 3 pressed')}
-                                style={{
-                                    backgroundColor: 'green',
-                                    padding: 10,
-                                    borderRadius: 5,
-                                }}
-                            >
-                                <Text style={{color: 'white'}}>Button 3</Text>
-                            </TouchableOpacity>
-                        </View>
-                        <TouchableOpacity
-                            onPress={() => setModalVisible(false)}
-                            style={{
-                                backgroundColor: 'red',
-                                padding: 10,
-                                borderRadius: 5,
-                                marginTop: 20,
-                            }}
-                        >
-                            <Text style={{color: 'white'}}>Close Modal</Text>
-                        </TouchableOpacity>
-                    </View>
-                </Modal>
-            </View>
+
+            {/*Modal*/}
+            <Modal
+                isVisible={isModalVisible}
+                animationIn="slideInUp"
+                animationOut="slideOutDown"
+                onBackdropPress={() => setModalVisible(false)}
+                onSwipeComplete={() => setModalVisible(false)}
+                swipeDirection="down"
+                style={styles.modalContainer}
+            >
+                <View style={styles.modal}>
+                    <MyText/>
+                </View>
+            </Modal>
+
             {/*============================================================================*/}
 
             {/*Title and Back Button  */}
@@ -190,24 +192,27 @@ const AccountRetrieval = () => {
                                         marginVertical: 15,
                                     }}
                                 >
-                                    <View
-                                        style={{
-                                            flexDirection: "row",
-                                            justifyContent: "space-between",
-                                            alignItems: "center",
-                                            padding: 3,
-                                            marginHorizontal: 15,
-                                        }}
-                                    >
-                                        <Text style={{color: "white", fontSize: 12}}>
-                                            使用原账号身份卡找回
-                                        </Text>
-                                        <FontAwesome5
-                                            name="angle-right"
-                                            size={20}
-                                            color="#FFFFFF"
-                                        />
-                                    </View>
+                                    {/*SECOND BUTTON*/}
+                                    <TouchableOpacity onPress={() => setModalVisible(true)}>
+                                        <View
+                                            style={{
+                                                flexDirection: "row",
+                                                justifyContent: "space-between",
+                                                alignItems: "center",
+                                                padding: 3,
+                                                marginHorizontal: 15,
+                                            }}
+                                        >
+                                            <Text style={{color: "white", fontSize: 12}}>
+                                                使用原账号身份卡找回
+                                            </Text>
+                                            <FontAwesome5
+                                                name="angle-right"
+                                                size={20}
+                                                color="#FFFFFF"
+                                            />
+                                        </View>
+                                    </TouchableOpacity>
                                     <View
                                         style={{
                                             borderBottomColor: "white",
@@ -217,6 +222,7 @@ const AccountRetrieval = () => {
                                     ></View>
                                 </View>
 
+                                {/*THIRD BUTTON*/}
                                 <View
                                 >
                                     <View
@@ -257,6 +263,30 @@ const AccountRetrieval = () => {
 const styles = StyleSheet.create({
     contentContainer: {
         marginBottom: Dimensions.get('window').height
-    }
+    },
+    modalContainer: {
+        margin: 0,
+        width: Dimensions.get('window').width,
+    },
+    modal: {
+        backgroundColor: 'transparent',
+        // padding: 22,
+        height: Dimensions.get('window').height / 5,
+        top: 270,
+        // justifyContent: 'center',
+        // alignItems: 'center',
+        borderRadius: 4,
+        borderColor: 'rgba(0, 0, 0, 0.1)',
+    },
+    textContainer: {
+        padding: 10,
+        borderRadius: 5,
+        backgroundColor: 'transparent',
+    },
+    text: {
+        color: '#FFFFFF',
+        fontSize: 16,
+        textAlign: 'center',
+    },
 })
 export default AccountRetrieval;
