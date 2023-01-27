@@ -29,6 +29,8 @@ import BindRequest from "./screens/UserProfileComponents/SettingsComponents/Bind
 import Introduction from "./screens/UserProfileComponents/SettingsComponents/Introduction";
 import AccountCertificate from "./screens/UserProfileComponents/SettingsComponents/AccountCertificate";
 import AccountRetrieval from "./screens/UserProfileComponents/SettingsComponents/AccountRetrieval";
+import MobileRetrieval
+    from "./screens/UserProfileComponents/SettingsComponents/AccountRetrievalComponents/MobileRetrieval";
 
 type Props = {};
 const App: React.FC = (props: Props) => {
@@ -52,6 +54,7 @@ const App: React.FC = (props: Props) => {
 
                         <Stack.Screen name="AccountCertificate" component={AccountCertificate}/>
                         <Stack.Screen name="AccountRetrieval" component={AccountRetrieval}/>
+                        <Stack.Screen name="MobileRetrieval" component={MobileRetrieval}/>
                     </Stack.Group>
                 </Stack.Navigator>
             </NavigationContainer>

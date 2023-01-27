@@ -509,7 +509,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#262632',
         // padding: 22,
         height: Dimensions.get('window').height / 5,
-        top: 310,
+        top: 290,
         // justifyContent: 'center',
         // alignItems: 'center',
         borderRadius: 4,

@@ -15,6 +15,7 @@ import {AntDesign} from "@expo/vector-icons";
 import {useNavigation} from "@react-navigation/native";
 import {StackNavigationProp} from "@react-navigation/stack";
 import {RootStackParamList} from "../../UserProfile";
+
 const BindRequest = () => {
 
     const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
@@ -24,14 +25,23 @@ const BindRequest = () => {
 
 
     return (
-        <ScrollView style={{flex: 1, maxHeight: Dimensions.get("window").height,
-            marginVertical: 20, maxWidth: Dimensions.get('window').width}}>
+        <ScrollView style={{
+            flex: 1, maxHeight: Dimensions.get("window").height,
+            marginVertical: 20, maxWidth: Dimensions.get('window').width
+        }}>
 
             {/*Title and Back Button  */}
-            <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'center', marginVertical: 10, backgroundColor: '#262632', height: 50}}>
+            <View style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'center',
+                marginVertical: 10,
+                backgroundColor: '#262632',
+                height: 50
+            }}>
                 <View style={{position: 'absolute', left: 5}}>
-                    <TouchableOpacity onPress={()=>navigation.navigate('Settings')}>
-                        <AntDesign name="left" size={24} color="white" />
+                    <TouchableOpacity onPress={() => navigation.navigate('Settings')}>
+                        <AntDesign name="left" size={24} color="white"/>
                     </TouchableOpacity>
                 </View>
                 <View style={{}}>

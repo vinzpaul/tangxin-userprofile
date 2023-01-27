@@ -7,7 +7,8 @@ import {
     Text,
     TouchableOpacity,
     View,
-    PanResponder
+    PanResponder,
+    Modal
 } from "react-native";
 import {AntDesign, FontAwesome5} from "@expo/vector-icons";
 import {useNavigation} from "@react-navigation/native";
@@ -32,13 +33,83 @@ const AccountRetrieval = () => {
 
     const [containerPosition, setContainerPosition] = useState(0);
 
+    const [modalVisible, setModalVisible] = useState(false);
+
     return (
+        // ===================================================================
         <View style={{
             flex: 1,
             maxHeight: Dimensions.get("window").height,
             marginVertical: 20,
             maxWidth: Dimensions.get("window").width,
         }}>
+            <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+                <TouchableOpacity
+                    onPress={() => setModalVisible(true)}
+                    style={{
+                        backgroundColor: 'blue',
+                        padding: 10,
+                        borderRadius: 5,
+                    }}
+                >
+                    <Text style={{color: 'white'}}>Open Modal</Text>
+                </TouchableOpacity>
+                <Modal
+                    animationType="slide"
+                    transparent={false}
+                    visible={modalVisible}
+                    onRequestClose={() => setModalVisible(false)}
+                >
+                    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+                        <View style={{flexDirection: 'column'}}>
+                            <TouchableOpacity
+                                onPress={() => alert('Button 1 pressed')}
+                                style={{
+                                    backgroundColor: 'green',
+                                    padding: 10,
+                                    borderRadius: 5,
+                                    marginBottom: 10,
+                                }}
+                            >
+                                <Text style={{color: 'white'}}>Button 1</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity
+                                onPress={() => alert('Button 2 pressed')}
+                                style={{
+                                    backgroundColor: 'green',
+                                    padding: 10,
+                                    borderRadius: 5,
+                                    marginBottom: 10,
+                                }}
+                            >
+                                <Text style={{color: 'white'}}>Button 2</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity
+                                onPress={() => alert('Button 3 pressed')}
+                                style={{
+                                    backgroundColor: 'green',
+                                    padding: 10,
+                                    borderRadius: 5,
+                                }}
+                            >
+                                <Text style={{color: 'white'}}>Button 3</Text>
+                            </TouchableOpacity>
+                        </View>
+                        <TouchableOpacity
+                            onPress={() => setModalVisible(false)}
+                            style={{
+                                backgroundColor: 'red',
+                                padding: 10,
+                                borderRadius: 5,
+                                marginTop: 20,
+                            }}
+                        >
+                            <Text style={{color: 'white'}}>Close Modal</Text>
+                        </TouchableOpacity>
+                    </View>
+                </Modal>
+            </View>
+            {/*============================================================================*/}
 
             {/*Title and Back Button  */}
             <View
@@ -82,24 +153,29 @@ const AccountRetrieval = () => {
                                         marginTop: 5,
                                     }}
                                 >
-                                    <View
-                                        style={{
-                                            flexDirection: "row",
-                                            justifyContent: "space-between",
-                                            alignItems: "center",
-                                            padding: 3,
-                                            marginHorizontal: 15,
-                                        }}
-                                    >
-                                        <Text style={{color: "white", fontSize: 12}}>
-                                            使用绑定手机号找回
-                                        </Text>
-                                        <FontAwesome5
-                                            name="angle-right"
-                                            size={20}
-                                            color="#FFFFFF"
-                                        />
-                                    </View>
+
+                                    {/*FIRST BUTTON*/}
+                                    <TouchableOpacity
+                                        onPress={() => navigation.navigate('MobileRetrieval')}>
+                                        <View
+                                            style={{
+                                                flexDirection: "row",
+                                                justifyContent: "space-between",
+                                                alignItems: "center",
+                                                padding: 3,
+                                                marginHorizontal: 15,
+                                            }}
+                                        >
+                                            <Text style={{color: "white", fontSize: 12}}>
+                                                使用绑定手机号找回
+                                            </Text>
+                                            <FontAwesome5
+                                                name="angle-right"
+                                                size={20}
+                                                color="#FFFFFF"
+                                            />
+                                        </View>
+                                    </TouchableOpacity>
                                     <View
                                         style={{
                                             borderBottomColor: "white",

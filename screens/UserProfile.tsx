@@ -37,6 +37,7 @@ export type RootStackParamList = {
     Introduction: undefined;
     AccountCertificate: undefined;
     AccountRetrieval: undefined;
+    MobileRetrieval: undefined;
 };
 
 import SettingsIcon from './UserProfileComponents/SettingsIcon';
