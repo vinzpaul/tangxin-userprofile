@@ -5,34 +5,28 @@ import {
     View,
     ScrollView,
     SafeAreaView,
-    SectionList,
-    StatusBar,
     Dimensions,
     Image,
-    FlatList, TouchableOpacity, ActivityIndicator, Button
+    TouchableOpacity
 } from "react-native";
 import Modal from 'react-native-modal';
 
 import {
-    EvilIcons,
-    FontAwesome5,
     Ionicons,
-    Feather,
-    Foundation,
-    Entypo,
     AntDesign,
     SimpleLineIcons,
     MaterialCommunityIcons,
     MaterialIcons
 } from "@expo/vector-icons";
-import {transform} from "typescript";
-import {NavigationContainer, useRoute} from "@react-navigation/native";
+
 import {useNavigation} from "@react-navigation/native";
 import {StackNavigationProp} from "@react-navigation/stack";
+
 import {RootStackParamList} from "../UserProfile";
+
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-import {useSelector, useDispatch, useStore} from 'react-redux';
+import {useSelector} from 'react-redux';
 
 const SettingsIcon = (props) => {
 
@@ -68,7 +62,7 @@ const SettingsIcon = (props) => {
 
     const [image, setImage] = useState(null);
     const [selected, setSelected] = useState(null);
-    const MyText = () => {
+    const ChangeGenderModal = () => {
 
         const handlePress = async (id) => {
             setSelected(id);
@@ -83,42 +77,36 @@ const SettingsIcon = (props) => {
 
         return (
             <SafeAreaView>
-                <View style={{
-                    marginVertical: 10,
-                    padding: 5,
-                    flexDirection: 'row',
-                    justifyContent: 'space-between',
-                    marginHorizontal: 20
-                }}>
+                <View style={styles.changeGenderModal}>
                     <TouchableOpacity onPress={() => setModalVisible(false)}>
-                        <Text style={{color: 'white'}}>取消</Text>
+                        <Text style={styles.cancelBtn}>取消</Text>
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => {
                         handlePress2;
                         setModalVisible(false)
                     }}>
-                        <Text style={{color: '#FF474E'}}>确定</Text>
+                        <Text style={styles.acceptBtn}>确定</Text>
                     </TouchableOpacity>
                 </View>
                 <View>
                     <TouchableOpacity
                         style={[
                             styles.textContainer,
-                            selected === 1 && {backgroundColor: '#191d26'}
+                            selected === 1 && styles.selectedTextHighlight
                         ]}
                         onPress={() => handlePress(1)}
                     >
-                        <Text style={[styles.text, selected === 1 && {color: '#FF474E'}]}>男</Text>
+                        <Text style={[styles.text, selected === 1 && styles.selectedTextChangeColor]}>男</Text>
                     </TouchableOpacity>
 
                     <TouchableOpacity
                         style={[
                             styles.textContainer,
-                            selected === 2 && {backgroundColor: '#191d26'}
+                            selected === 2 && styles.selectedTextHighlight
                         ]}
                         onPress={() => handlePress(2)}
                     >
-                        <Text style={[styles.text, selected === 2 && {color: '#FF474E'}]}>女</Text>
+                        <Text style={[styles.text, selected === 2 && styles.selectedTextChangeColor]}>女</Text>
                     </TouchableOpacity>
                 </View>
             </SafeAreaView>
@@ -157,27 +145,17 @@ const SettingsIcon = (props) => {
     }, [])
 
     return (
-        <ScrollView style={{
-            flex: 1, maxHeight: Dimensions.get("window").height,
-            marginVertical: 20
-        }}>
+        <ScrollView style={styles.mainContainer}>
 
             {/*Title and Back Button  */}
-            <View style={{
-                flexDirection: 'row',
-                alignItems: 'center',
-                justifyContent: 'center',
-                marginVertical: 10,
-                backgroundColor: '#262632',
-                height: 50
-            }}>
-                <View style={{position: 'absolute', left: 5}}>
+            <View style={styles.titleContainer}>
+                <View style={styles.backBtn}>
                     <TouchableOpacity onPress={() => navigation.navigate('UserProfile')}>
                         <AntDesign name="left" size={24} color="white"/>
                     </TouchableOpacity>
                 </View>
                 <View style={{}}>
-                    <Text style={{color: '#FFFFFF', textAlign: 'center', fontSize: 20}}>设置</Text>
+                    <Text style={styles.title}>设置</Text>
                 </View>
             </View>
 
@@ -192,29 +170,25 @@ const SettingsIcon = (props) => {
                 style={styles.modalContainer}
             >
                 <View style={styles.modal}>
-                    <MyText/>
+                    <ChangeGenderModal/>
                 </View>
             </Modal>
 
-            <View style={{padding: 5}}>
+            <View style={styles.innerContainer}>
+
                 {/*Profile Photo*/}
                 <TouchableOpacity onPress={() => navigation.navigate('ProfilePhoto')}>
-                    <View style={{
-                        flexDirection: 'row',
-                        alignItems: 'center',
-                        justifyContent: 'space-between',
-                        marginHorizontal: 10
-                    }}>
-                        <Text style={{color: 'white', fontSize: 15}}>头像</Text>
-                        <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                    <View style={styles.profilePhotoContainer}>
+                        <Text style={styles.sectionTitle}>头像</Text>
+                        <View style={styles.profilePhotoInnerContainer}>
                             {!selectedImage ? (
                                 <Image
-                                    style={{width: 40, height: 40, borderRadius: 20}}
+                                    style={styles.profilePhoto}
                                     source={require('../../assets/profilePhoto.jpg')}
                                 />
                             ) : (
                                 <Image
-                                    style={{width: 40, height: 40, borderRadius: 20, marginRight: 10}}
+                                    style={styles.profilePhoto}
                                     source={selectedImage}
                                     defaultSource={selectedImage}
                                 />
@@ -224,18 +198,13 @@ const SettingsIcon = (props) => {
                     </View>
                 </TouchableOpacity>
 
+
                 {/*System Name Given*/}
                 <TouchableOpacity onPress={() => navigation.navigate('PetName')}>
-                    <View style={{
-                        flexDirection: 'row',
-                        alignItems: 'center',
-                        justifyContent: 'space-between',
-                        marginHorizontal: 10,
-                        marginVertical: 20
-                    }}>
-                        <Text style={{color: 'white', fontSize: 14}}>昵称</Text>
-                        <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                            <Text style={{color: 'white', fontSize: 14, marginRight: 10}}>受伤的期待</Text>
+                    <View style={styles.sectionContainer}>
+                        <Text style={styles.sectionTitle}>昵称</Text>
+                        <View style={styles.sectionInnerContainer}>
+                            <Text style={styles.sectionDetails}>受伤的期待</Text>
                             <AntDesign name="right" size={18} color="white"/>
                         </View>
                     </View>
@@ -243,20 +212,10 @@ const SettingsIcon = (props) => {
 
                 {/*Gender*/}
                 <TouchableOpacity onPress={() => setModalVisible(true)}>
-                    <View style={{
-                        flexDirection: 'row',
-                        alignItems: 'center',
-                        justifyContent: 'space-between',
-                        marginHorizontal: 10,
-                        marginVertical: 5
-                    }}>
-                        <Text style={{color: 'white', fontSize: 14}}>性别</Text>
-                        <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                            {/*<Image*/}
-                            {/*    style={{ width: 40, height: 40, borderRadius: 20, marginRight: 10 }}*/}
-                            {/*    source={image}*/}
-                            {/*/>*/}
-                            <View style={{marginRight: 10}}>
+                    <View style={styles.sectionContainer}>
+                        <Text style={styles.sectionTitle}>性别</Text>
+                        <View style={styles.sectionInnerContainer}>
+                            <View style={styles.genderContainer}>
                                 <Text>{image}</Text>
                             </View>
                             <AntDesign name="right" size={18} color="white"/>
@@ -266,16 +225,10 @@ const SettingsIcon = (props) => {
 
                 {/*Mobile Number*/}
                 <TouchableOpacity onPress={() => navigation.navigate('BindRequest')}>
-                    <View style={{
-                        flexDirection: 'row',
-                        alignItems: 'center',
-                        justifyContent: 'space-between',
-                        marginHorizontal: 10,
-                        marginVertical: 20
-                    }}>
-                        <Text style={{color: 'white', fontSize: 14}}>手机号</Text>
-                        <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                            <Text style={{color: 'white', fontSize: 14, marginRight: 10}}>去绑定</Text>
+                    <View style={styles.sectionContainer}>
+                        <Text style={styles.sectionTitle}>手机号</Text>
+                        <View style={styles.sectionInnerContainer}>
+                            <Text style={styles.sectionDetails}>去绑定</Text>
                             <AntDesign name="right" size={18} color="white"/>
                         </View>
                     </View>
@@ -283,81 +236,41 @@ const SettingsIcon = (props) => {
 
                 {/*Introduction*/}
                 <TouchableOpacity onPress={() => navigation.navigate('Introduction')}>
-                    <View style={{
-                        flexDirection: 'row',
-                        alignItems: 'center',
-                        justifyContent: 'space-between',
-                        marginHorizontal: 10,
-                        marginVertical: 5
-                    }}>
-                        <Text style={{color: 'white', fontSize: 14}}>个人简介</Text>
-                        <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                            <Text style={{color: 'white', fontSize: 14, marginRight: 10}}>用户很懒,什么也没留下</Text>
+                    <View style={styles.sectionContainer}>
+                        <Text style={styles.sectionTitle}>个人简介</Text>
+                        <View style={styles.sectionInnerContainer}>
+                            <Text style={styles.sectionDetails}>用户很懒,什么也没留下</Text>
                             <AntDesign name="right" size={18} color="white"/>
                         </View>
                     </View>
                 </TouchableOpacity>
 
                 {/*Account*/}
-                <View style={{
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                    marginHorizontal: 10,
-                    marginTop: 25
-                }}>
-                    <Text style={{color: 'white', fontSize: 12}}>账号</Text>
+                <View style={styles.actionAndOthersContainer}>
+                    <Text style={styles.accountAndOthersTitle}>账号</Text>
                 </View>
 
-                <View style={{
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                    marginHorizontal: 10,
-                    marginTop: 10
-                }}>
-                    <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                <View style={styles.sectionContainer}>
+                    <View style={styles.sectionInnerContainer}>
                         <SimpleLineIcons name="user" size={20} color="white"/>
-                        <Text style={{color: 'white', fontSize: 14, marginLeft: 5}}>账号ID</Text>
+                        <Text style={styles.accountAndOthersSection}>账号ID</Text>
                     </View>
-                    <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                    <View style={styles.sectionInnerContainer}>
                         <Text style={{color: 'white'}}>CDWQMC</Text>
-                        <View
-                            style={{
-                                backgroundColor: "#FF474E",
-                                width: 55,
-                                height: 25,
-                                justifyContent: "center",
-                                alignItems: "center",
-                                marginLeft: 10,
-                                marginRight: 5
-                            }}
-                        >
-                            <Text
-                                style={{
-                                    color: "white",
-                                    textAlign: "center",
-                                    fontSize: 12,
-                                }}
-                            >
-                                复制
-                            </Text>
-                        </View>
+                        <TouchableOpacity>
+                            <View style={styles.copyBtnContainer}>
+                                <Text style={styles.copyBtn}>复制</Text>
+                            </View>
+                        </TouchableOpacity>
                     </View>
                 </View>
 
                 {/*Account Certificate*/}
                 <TouchableOpacity onPress={() => navigation.navigate('AccountCertificate')}>
-                    <View style={{
-                        flexDirection: 'row',
-                        alignItems: 'center',
-                        justifyContent: 'space-between',
-                        marginHorizontal: 10,
-                        marginTop: 20
-                    }}>
-                        <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                    <View style={styles.sectionContainer}>
+                        <View style={styles.sectionInnerContainer}>
                             <MaterialCommunityIcons name="file-certificate-outline" size={20} color="white"/>
-                            <Text style={{color: 'white', fontSize: 14, marginLeft: 5}}>账号凭证</Text>
+                            <Text style={styles.accountAndOthersSection}>账号凭证</Text>
                         </View>
                         <AntDesign name="right" size={18} color="white"/>
                     </View>
@@ -365,132 +278,84 @@ const SettingsIcon = (props) => {
 
 
                 <TouchableOpacity onPress={() => navigation.navigate('AccountRetrieval')}>
-                    <View style={{
-                        flexDirection: 'row',
-                        alignItems: 'center',
-                        justifyContent: 'space-between',
-                        marginHorizontal: 10,
-                        marginTop: 20
-                    }}>
-                        <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                    <View style={styles.sectionContainer}>
+                        <View style={styles.sectionInnerContainer}>
                             <MaterialIcons name="person-search" size={20} color="white"/>
-                            <Text style={{color: 'white', fontSize: 14, marginLeft: 5}}>找回账号</Text>
+                            <Text style={styles.accountAndOthersSection}>找回账号</Text>
                         </View>
-                        <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                            <Text style={{color: 'white', fontSize: 14, marginRight: 10}}>账号丢失极速找回</Text>
+                        <View style={styles.sectionInnerContainer}>
+                            <Text style={styles.sectionDetails}>账号丢失极速找回</Text>
                             <AntDesign name="right" size={18} color="white"/>
                         </View>
                     </View>
                 </TouchableOpacity>
 
-                <View style={{
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                    marginHorizontal: 10,
-                    marginTop: 20
-                }}>
-                    <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                <View style={styles.sectionContainer}>
+                    <View style={styles.sectionInnerContainer}>
                         <AntDesign name="codesquareo" size={20} color="white"/>
-                        <Text style={{color: 'white', fontSize: 14, marginLeft: 5}}>绑定邀请码</Text>
+                        <Text style={styles.accountAndOthersSection}>绑定邀请码</Text>
                     </View>
-                    <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                        <Text style={{color: 'white', fontSize: 14, marginRight: 10}}>去绑定</Text>
+                    <View style={styles.sectionInnerContainer}>
+                        <Text style={styles.sectionDetails}>去绑定</Text>
                         <AntDesign name="right" size={18} color="white"/>
                     </View>
                 </View>
                 {/*Account Ends Here*/}
 
                 {/*Others*/}
-                <View style={{
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                    marginHorizontal: 10,
-                    marginTop: 30
-                }}>
-                    <Text style={{color: 'white', fontSize: 12}}>其他</Text>
+                <View style={styles.actionAndOthersContainer}>
+                    <Text style={styles.accountAndOthersTitle}>其他</Text>
                 </View>
 
-                <View style={{
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                    marginHorizontal: 10,
-                    marginTop: 20
-                }}>
-                    <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                <View style={styles.sectionContainer}>
+                    <View style={styles.sectionInnerContainer}>
                         <AntDesign name="customerservice" size={20} color="white"/>
-                        <Text style={{color: 'white', fontSize: 14, marginLeft: 5}}>联系客服</Text>
+                        <Text style={styles.accountAndOthersSection}>联系客服</Text>
                     </View>
-                    <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                    <View style={styles.sectionInnerContainer}>
 
                         <AntDesign name="right" size={18} color="white"/>
                     </View>
                 </View>
 
-                <View style={{
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                    marginHorizontal: 10,
-                    marginTop: 20
-                }}>
-                    <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                <View style={styles.sectionContainer}>
+                    <View style={styles.sectionInnerContainer}>
                         <MaterialIcons name="policy" size={20} color="white"/>
-                        <Text style={{color: 'white', fontSize: 14, marginLeft: 5}}>隐私政策</Text>
+                        <Text style={styles.accountAndOthersSection}>隐私政策</Text>
                     </View>
-                    <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                    <View style={styles.sectionInnerContainer}>
                         <AntDesign name="right" size={18} color="white"/>
                     </View>
                 </View>
 
-                <View style={{
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                    marginHorizontal: 10,
-                    marginTop: 20
-                }}>
-                    <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                <View style={styles.sectionContainer}>
+                    <View style={styles.sectionInnerContainer}>
                         <MaterialIcons name="notes" size={20} color="white"/>
-                        <Text style={{color: 'white', fontSize: 14, marginLeft: 5}}>服务条款</Text>
+                        <Text style={styles.accountAndOthersSection}>服务条款</Text>
                     </View>
-                    <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                    <View style={styles.sectionInnerContainer}>
 
                         <AntDesign name="right" size={18} color="white"/>
                     </View>
                 </View>
 
-                <View style={{
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                    marginHorizontal: 10,
-                    marginTop: 20
-                }}>
-                    <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                <View style={styles.sectionContainer}>
+                    <View style={styles.sectionInnerContainer}>
                         <MaterialCommunityIcons name="heart-pulse" size={20} color="white"/>
-                        <Text style={{color: 'white', fontSize: 14, marginLeft: 5}}>关于糖心</Text>
+                        <Text style={styles.accountAndOthersSection}>关于糖心</Text>
                     </View>
-                    <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                    <View style={styles.sectionInnerContainer}>
 
                         <AntDesign name="right" size={18} color="white"/>
                     </View>
                 </View>
 
-                <View style={{
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                    marginHorizontal: 10,
-                    marginTop: 20
-                }}>
-                    <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                <View style={styles.sectionContainer}>
+                    <View style={styles.sectionInnerContainer}>
                         <SimpleLineIcons name="lock" size={20} color="white"/>
-                        <Text style={{color: 'white', fontSize: 14, marginLeft: 5}}>应用锁</Text>
+                        <Text style={styles.accountAndOthersSection}>应用锁</Text>
                     </View>
-                    <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                    <View style={styles.sectionInnerContainer}>
                         <AntDesign name="right" size={18} color="white"/>
                     </View>
                 </View>
@@ -500,6 +365,92 @@ const SettingsIcon = (props) => {
 };
 
 const styles = StyleSheet.create({
+    mainContainer: {
+        flex: 1, maxHeight: Dimensions.get("window").height,
+        marginVertical: 20
+    },
+    titleContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginVertical: 10,
+        backgroundColor: '#262632',
+        height: 50
+    },
+    backBtn: {
+        position: 'absolute', left: 5
+    },
+    title: {
+        color: '#FFFFFF', textAlign: 'center', fontSize: 20
+    },
+    //
+    innerContainer: {
+        padding: 5
+    },
+
+    //Profile Photo
+    profilePhotoContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        marginHorizontal: 10
+    },
+    profilePhotoInnerContainer: {
+        flexDirection: 'row', alignItems: 'center'
+    },
+    profilePhoto: {
+        width: 40, height: 40, borderRadius: 20, marginRight: 10
+    },
+
+    //Section, Account & Others Container
+    sectionContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        marginHorizontal: 10,
+        marginTop: 20
+    },
+    actionAndOthersContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        marginHorizontal: 10,
+        marginTop: 30
+    },
+    sectionTitle: {
+        color: 'white', fontSize: 14
+    },
+    accountAndOthersTitle: {
+        color: 'white', fontSize: 12
+    },
+    sectionInnerContainer: {
+        flexDirection: 'row', alignItems: 'center'
+    },
+    sectionDetails: {
+        color: 'white', fontSize: 14, marginRight: 10
+    },
+    accountAndOthersSection: {
+        color: 'white', fontSize: 14, marginLeft: 5
+    },
+    copyBtnContainer: {
+        backgroundColor: "#FF474E",
+        width: 55,
+        height: 25,
+        justifyContent: "center",
+        alignItems: "center",
+        marginLeft: 10,
+        marginRight: 5
+    },
+    copyBtn: {
+        color: "white",
+        textAlign: "center",
+        fontSize: 12,
+    },
+
+    genderContainer: {
+        marginRight: 10
+    },
+    //
     modalContainer: {
         margin: 0,
         width: Dimensions.get('window').width,
@@ -521,6 +472,27 @@ const styles = StyleSheet.create({
         fontSize: 16,
         textAlign: 'center',
     },
+
+    //Modal Component
+    changeGenderModal: {
+        marginVertical: 10,
+        padding: 5,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        marginHorizontal: 20
+    },
+    cancelBtn: {
+        color: 'white'
+    },
+    acceptBtn: {
+        color: '#FF474E'
+    },
+    selectedTextHighlight: {
+        backgroundColor: '#191d26'
+    },
+    selectedTextChangeColor: {
+        color: '#FF474E'
+    }
 });
 
 export default SettingsIcon;
