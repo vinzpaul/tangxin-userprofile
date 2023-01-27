@@ -276,7 +276,7 @@ const SettingsIcon = (props) => {
                     </View>
                 </TouchableOpacity>
 
-
+                {/*ACCOUNT RETRIEVAL*/}
                 <TouchableOpacity onPress={() => navigation.navigate('AccountRetrieval')}>
                     <View style={styles.sectionContainer}>
                         <View style={styles.sectionInnerContainer}>
@@ -290,16 +290,19 @@ const SettingsIcon = (props) => {
                     </View>
                 </TouchableOpacity>
 
-                <View style={styles.sectionContainer}>
-                    <View style={styles.sectionInnerContainer}>
-                        <AntDesign name="codesquareo" size={20} color="white"/>
-                        <Text style={styles.accountAndOthersSection}>绑定邀请码</Text>
+                {/*Code*/}
+                <TouchableOpacity onPress={() => navigation.navigate('RequestCode')}>
+                    <View style={styles.sectionContainer}>
+                        <View style={styles.sectionInnerContainer}>
+                            <AntDesign name="codesquareo" size={20} color="white"/>
+                            <Text style={styles.accountAndOthersSection}>绑定邀请码</Text>
+                        </View>
+                        <View style={styles.sectionInnerContainer}>
+                            <Text style={styles.sectionDetails}>去绑定</Text>
+                            <AntDesign name="right" size={18} color="white"/>
+                        </View>
                     </View>
-                    <View style={styles.sectionInnerContainer}>
-                        <Text style={styles.sectionDetails}>去绑定</Text>
-                        <AntDesign name="right" size={18} color="white"/>
-                    </View>
-                </View>
+                </TouchableOpacity>
                 {/*Account Ends Here*/}
 
                 {/*Others*/}
@@ -307,48 +310,59 @@ const SettingsIcon = (props) => {
                     <Text style={styles.accountAndOthersTitle}>其他</Text>
                 </View>
 
-                <View style={styles.sectionContainer}>
-                    <View style={styles.sectionInnerContainer}>
-                        <AntDesign name="customerservice" size={20} color="white"/>
-                        <Text style={styles.accountAndOthersSection}>联系客服</Text>
-                    </View>
-                    <View style={styles.sectionInnerContainer}>
+                <TouchableOpacity onPress={() => navigation.navigate('Chat')}>
+                    <View style={styles.sectionContainer}>
+                        <View style={styles.sectionInnerContainer}>
+                            <AntDesign name="customerservice" size={20} color="white"/>
+                            <Text style={styles.accountAndOthersSection}>联系客服</Text>
+                        </View>
+                        <View style={styles.sectionInnerContainer}>
 
-                        <AntDesign name="right" size={18} color="white"/>
+                            <AntDesign name="right" size={18} color="white"/>
+                        </View>
                     </View>
-                </View>
+                </TouchableOpacity>
 
-                <View style={styles.sectionContainer}>
-                    <View style={styles.sectionInnerContainer}>
-                        <MaterialIcons name="policy" size={20} color="white"/>
-                        <Text style={styles.accountAndOthersSection}>隐私政策</Text>
+                {/*Privacy Policy*/}
+                <TouchableOpacity onPress={() => navigation.navigate('PrivacyPolicy')}>
+                    <View style={styles.sectionContainer}>
+                        <View style={styles.sectionInnerContainer}>
+                            <MaterialIcons name="policy" size={20} color="white"/>
+                            <Text style={styles.accountAndOthersSection}>隐私政策</Text>
+                        </View>
+                        <View style={styles.sectionInnerContainer}>
+                            <AntDesign name="right" size={18} color="white"/>
+                        </View>
                     </View>
-                    <View style={styles.sectionInnerContainer}>
-                        <AntDesign name="right" size={18} color="white"/>
-                    </View>
-                </View>
+                </TouchableOpacity>
 
-                <View style={styles.sectionContainer}>
-                    <View style={styles.sectionInnerContainer}>
-                        <MaterialIcons name="notes" size={20} color="white"/>
-                        <Text style={styles.accountAndOthersSection}>服务条款</Text>
-                    </View>
-                    <View style={styles.sectionInnerContainer}>
+                {/*Service Provisions*/}
+                <TouchableOpacity onPress={() => navigation.navigate('ServiceProvisions')}>
+                    <View style={styles.sectionContainer}>
+                        <View style={styles.sectionInnerContainer}>
+                            <MaterialIcons name="notes" size={20} color="white"/>
+                            <Text style={styles.accountAndOthersSection}>服务条款</Text>
+                        </View>
+                        <View style={styles.sectionInnerContainer}>
 
-                        <AntDesign name="right" size={18} color="white"/>
+                            <AntDesign name="right" size={18} color="white"/>
+                        </View>
                     </View>
-                </View>
+                </TouchableOpacity>
 
-                <View style={styles.sectionContainer}>
-                    <View style={styles.sectionInnerContainer}>
-                        <MaterialCommunityIcons name="heart-pulse" size={20} color="white"/>
-                        <Text style={styles.accountAndOthersSection}>关于糖心</Text>
-                    </View>
-                    <View style={styles.sectionInnerContainer}>
+                {/*About*/}
+                <TouchableOpacity onPress={() => navigation.navigate('About')}>
+                    <View style={styles.sectionContainer}>
+                        <View style={styles.sectionInnerContainer}>
+                            <MaterialCommunityIcons name="heart-pulse" size={20} color="white"/>
+                            <Text style={styles.accountAndOthersSection}>关于糖心</Text>
+                        </View>
+                        <View style={styles.sectionInnerContainer}>
 
-                        <AntDesign name="right" size={18} color="white"/>
+                            <AntDesign name="right" size={18} color="white"/>
+                        </View>
                     </View>
-                </View>
+                </TouchableOpacity>
 
                 <View style={styles.sectionContainer}>
                     <View style={styles.sectionInnerContainer}>

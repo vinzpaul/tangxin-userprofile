@@ -27,12 +27,17 @@ export type RootStackParamList = {
     UserProfile: undefined;
     ProfilePhoto: undefined;
     PetName: undefined;
-    BindRequest: undefined;
+    MobileBindRequest: undefined;
     Introduction: undefined;
     AccountCertificate: undefined;
     AccountRetrieval: undefined;
     MobileRetrieval: undefined;
     CameraInit: undefined;
+    RequestCode: undefined;
+    PrivacyPolicy: undefined;
+    ServiceProvisions: undefined;
+    About: undefined;
+    Chat: undefined;
 };
 import {useSelector} from "react-redux";
 

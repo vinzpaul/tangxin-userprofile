@@ -30,6 +30,11 @@ import AccountRetrieval from "./screens/UserProfileComponents/SettingsComponents
 import MobileRetrieval
     from "./screens/UserProfileComponents/SettingsComponents/AccountRetrievalComponents/MobileRetrieval";
 import CameraInit from './screens/UserProfileComponents/SettingsComponents/AccountRetrievalComponents/CameraInit'
+import RequestCode from "./screens/UserProfileComponents/SettingsComponents/RequestCode";
+import PrivacyPolicy from "./screens/UserProfileComponents/SettingsComponents/PrivacyPolicy";
+import ServiceProvisions from "./screens/UserProfileComponents/SettingsComponents/ServiceProvisions";
+import About from "./screens/UserProfileComponents/SettingsComponents/About";
+import Chat from "./screens/UserProfileComponents/SettingsComponents/Chat";
 
 type Props = {};
 const App: React.FC = (props: Props) => {
@@ -51,10 +56,18 @@ const App: React.FC = (props: Props) => {
                         <Stack.Screen name="MobileBindRequest" component={MobileBindRequest}/>
                         <Stack.Screen name="Introduction" component={Introduction}/>
 
+                        {/*Account */}
                         <Stack.Screen name="AccountCertificate" component={AccountCertificate}/>
                         <Stack.Screen name="AccountRetrieval" component={AccountRetrieval}/>
                         <Stack.Screen name="MobileRetrieval" component={MobileRetrieval}/>
                         <Stack.Screen name="CameraInit" component={CameraInit}/>
+                        <Stack.Screen name="RequestCode" component={RequestCode}/>
+
+                        {/*Others*/}
+                        <Stack.Screen name="Chat" component={Chat}/>
+                        <Stack.Screen name="PrivacyPolicy" component={PrivacyPolicy}/>
+                        <Stack.Screen name='ServiceProvisions' component={ServiceProvisions}/>
+                        <Stack.Screen name="About" component={About}/>
                     </Stack.Group>
                 </Stack.Navigator>
             </NavigationContainer>
