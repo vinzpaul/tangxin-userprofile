@@ -7,7 +7,7 @@ import {
     SafeAreaView,
     Dimensions,
     Image,
-    TouchableOpacity,
+    TouchableOpacity, Pressable,
 } from "react-native";
 
 import {
@@ -38,6 +38,8 @@ export type RootStackParamList = {
     ServiceProvisions: undefined;
     About: undefined;
     Chat: undefined;
+    PasscodeLock: undefined;
+    UserHome: undefined;
 };
 import {useSelector} from "react-redux";
 
@@ -114,18 +116,21 @@ const UserProfile = ({}) => {
                                         </View>
                                     </View>
                                     <View
-                                        style={styles.homeButtonContainer}
+
                                     >
-                                        <Text
-                                            style={styles.homeButton}
-                                        >
-                                            主页
-                                        </Text>
-                                        <FontAwesome5
-                                            name="angle-right"
-                                            size={15}
-                                            color="white"
-                                        />
+                                        <TouchableOpacity onPress={() => navigation.navigate('UserHome')}
+                                                          style={styles.homeButtonContainer}>
+                                            <Text
+                                                style={styles.homeButton}
+                                            >
+                                                主页
+                                            </Text>
+                                            <FontAwesome5
+                                                name="angle-right"
+                                                size={15}
+                                                color="white"
+                                            />
+                                        </TouchableOpacity>
                                     </View>
                                 </View>
                             </View>
@@ -531,6 +536,7 @@ const styles = StyleSheet.create({
         alignItems: "center",
         position: "absolute",
         right: -100,
+        top: -10
     },
     homeButton: {
         color: "white",

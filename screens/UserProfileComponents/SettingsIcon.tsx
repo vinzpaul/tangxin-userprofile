@@ -364,15 +364,17 @@ const SettingsIcon = (props) => {
                     </View>
                 </TouchableOpacity>
 
-                <View style={styles.sectionContainer}>
-                    <View style={styles.sectionInnerContainer}>
-                        <SimpleLineIcons name="lock" size={20} color="white"/>
-                        <Text style={styles.accountAndOthersSection}>应用锁</Text>
+                <TouchableOpacity onPress={() => navigation.navigate('PasscodeLock')}>
+                    <View style={styles.sectionContainer}>
+                        <View style={styles.sectionInnerContainer}>
+                            <SimpleLineIcons name="lock" size={20} color="white"/>
+                            <Text style={styles.accountAndOthersSection}>应用锁</Text>
+                        </View>
+                        <View style={styles.sectionInnerContainer}>
+                            <AntDesign name="right" size={18} color="white"/>
+                        </View>
                     </View>
-                    <View style={styles.sectionInnerContainer}>
-                        <AntDesign name="right" size={18} color="white"/>
-                    </View>
-                </View>
+                </TouchableOpacity>
             </View>
         </ScrollView>
     )

@@ -35,6 +35,8 @@ import PrivacyPolicy from "./screens/UserProfileComponents/SettingsComponents/Pr
 import ServiceProvisions from "./screens/UserProfileComponents/SettingsComponents/ServiceProvisions";
 import About from "./screens/UserProfileComponents/SettingsComponents/About";
 import Chat from "./screens/UserProfileComponents/SettingsComponents/Chat";
+import PasscodeLock from "./screens/UserProfileComponents/SettingsComponents/PasscodeLock";
+import UserHome from "./screens/UserProfileComponents/UserHome";
 
 type Props = {};
 const App: React.FC = (props: Props) => {
@@ -68,6 +70,12 @@ const App: React.FC = (props: Props) => {
                         <Stack.Screen name="PrivacyPolicy" component={PrivacyPolicy}/>
                         <Stack.Screen name='ServiceProvisions' component={ServiceProvisions}/>
                         <Stack.Screen name="About" component={About}/>
+                        <Stack.Screen name="PasscodeLock" component={PasscodeLock}/>
+                    </Stack.Group>
+
+                    {/*UserHome*/}
+                    <Stack.Group>
+                        <Stack.Screen name="UserHome" component={UserHome}/>
                     </Stack.Group>
                 </Stack.Navigator>
             </NavigationContainer>
